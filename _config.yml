@@ -1,0 +1,16 @@
+
+# Site settings
+title: 'Jekyll + Tachyons Starter'
+email: ackernaut@gmail.com
+description: 'A minimal, clean starting point using Jeykll + Tachyons'
+baseurl:          /jekyll-tachyons-starter
+url:              http://ackernaut.github.io
+name:             'Jekyll + Tachyons Starter'
+permalink:        pretty
+twitter_username: ackernaut
+github_username:  ackernaut
+port: 4040
+
+# Build settings
+markdown: kramdown
+exclude:  [node_modules]

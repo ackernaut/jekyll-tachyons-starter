@@ -1,0 +1,6 @@
+
+// ui.js
+
+$(function() {
+  // Define
+});

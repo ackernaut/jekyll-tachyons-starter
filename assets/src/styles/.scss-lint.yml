@@ -1,9 +1,6 @@
 exclude:
-  - '_base.scss'
-  - '_bootstrap-import.scss'
-  - '_clearfix.scss'
-  - '_modals.scss'
-  - '_syntax-highlighting.scss'
+  - 'mixins/_mixins.scss'
+  - 'libs/_pygments-manni.scss'
 
 linters:
   ColorVariable:

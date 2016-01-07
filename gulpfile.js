@@ -1,6 +1,6 @@
 
 // Require
-// -------
+// --------
 
 var browserSync  = require('browser-sync'),
     cp           = require('child_process'),
@@ -17,7 +17,7 @@ var browserSync  = require('browser-sync'),
     uglify       = require('gulp-uglify');
 
 // Paths
-// -----
+// ------
 
 var css     = 'assets/dist/css',
     js      = 'assets/dist/js',
@@ -61,7 +61,7 @@ gulp.task('browser-sync', ['scripts', 'styles', 'jekyll-build'], function () {
 });
 
 // Clean
-// -----
+// ------
 
 gulp.task('clean', function (cb) {
   del([
@@ -71,17 +71,15 @@ gulp.task('clean', function (cb) {
 });
 
 // Default
-// -------
+// --------
 
-// gulp.task('default', ['clean', 'scripts', 'styles']);
 gulp.task('default', ['browser-sync', 'watch']);
 
 // Scripts
-// -------
+// --------
 
 gulp.task('scripts', function () {
   return gulp.src(scripts)
-    // .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(concat('scripts.js', {
       newLine: ';'
@@ -103,7 +101,7 @@ gulp.task('jshint', function () {
 });
 
 // Sass lint
-// ---------
+// ----------
 
 gulp.task('scsslint', function () {
   return gulp.src(styles)
@@ -112,7 +110,7 @@ gulp.task('scsslint', function () {
 });
 
 // Styles
-// ------
+// -------
 
 gulp.task('styles', function () {
   return gulp.src(styles)
@@ -133,10 +131,10 @@ gulp.task('styles', function () {
 });
 
 // Watch
-// -----
+// ------
 
 gulp.task('watch', function () {
   gulp.watch(scripts, ['scripts']);
   gulp.watch(styles, ['styles']);
-  gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['jekyll-rebuild']);
+  gulp.watch(['**/*.html', '_includes/**/*.html', '_layouts/**/*.html', '_posts/*'], ['jekyll-rebuild']);
 });

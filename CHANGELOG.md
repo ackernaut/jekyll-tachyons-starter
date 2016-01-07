@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 This document is based on recommendations by [Keep a CHANGELOG](http://keepachangelog.com/).
 
+## [0.0.4] - 2016-01-07
+### Added
+- Watch for nested HTML files, etc.
+
 ## [0.0.3] - 2016-01-07
 ### Added
 - Added Browsersync.

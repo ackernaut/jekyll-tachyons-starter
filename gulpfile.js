@@ -2,7 +2,9 @@
 // Require
 // -------
 
-var del          = require('del'),
+var browserSync  = require('browser-sync'),
+    cp           = require('child_process'),
+    del          = require('del'),
     gulp         = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     concat       = require('gulp-concat'),
@@ -27,6 +29,37 @@ var css     = 'assets/dist/css',
             ],
     styles  = 'assets/src/styles/**/*.scss';
 
+var messages = {
+    jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
+};
+
+// Build the Jekyll Site
+// ----------------------
+
+gulp.task('jekyll-build', function (done) {
+  browserSync.notify(messages.jekyllBuild);
+  return cp.spawn('jekyll', ['build', '--config=./_config.yml,./_dev/_config.yml'], { stdio: 'inherit' })
+    .on('close', done);
+});
+
+// Rebuild Jekyll, run page reload
+// --------------------------------
+
+gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
+  browserSync.reload();
+});
+
+// Wait for jekyll-build, then launch the Server
+// ----------------------------------------------
+
+gulp.task('browser-sync', ['scripts', 'styles', 'jekyll-build'], function () {
+  browserSync({
+    server: {
+      baseDir: '_site'
+    }
+  });
+});
+
 // Clean
 // -----
 
@@ -40,12 +73,13 @@ gulp.task('clean', function (cb) {
 // Default
 // -------
 
-gulp.task('default', ['clean', 'scripts', 'styles']);
+// gulp.task('default', ['clean', 'scripts', 'styles']);
+gulp.task('default', ['browser-sync', 'watch']);
 
 // Scripts
 // -------
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
   return gulp.src(scripts)
     // .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
@@ -53,13 +87,16 @@ gulp.task('scripts', function() {
       newLine: ';'
     }))
     .pipe(gulp.dest(js))
+    .pipe(gulp.dest('_site/' + js))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
     .pipe(gulp.dest(js))
+    .pipe(gulp.dest('_site/' + js))
+    .pipe(browserSync.reload({ stream: true }))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   return gulp.src('assets/src/scripts/**/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'));
@@ -68,7 +105,7 @@ gulp.task('jshint', function() {
 // Sass lint
 // ---------
 
-gulp.task('scsslint', function() {
+gulp.task('scsslint', function () {
   return gulp.src(styles)
     .pipe(scsslint('assets/src/styles/.scss-lint.yml'))
     .pipe(scsslint.reporter());
@@ -77,24 +114,29 @@ gulp.task('scsslint', function() {
 // Styles
 // ------
 
-gulp.task('styles', function() {
+gulp.task('styles', function () {
   return gulp.src(styles)
     .pipe(sass({
       includePaths: ['node_modules'],
-      outputStyle: 'expanded'
+      outputStyle: 'expanded',
+      onError: browserSync.notify
     }))
     .pipe(autoprefixer())
     .pipe(gulp.dest(css))
+    .pipe(gulp.dest('_site/' + css))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
     .pipe(gulp.dest(css))
+    .pipe(gulp.dest('_site/' + css))
+    .pipe(browserSync.reload({ stream: true }))
     .pipe(notify({ message: 'Styles task complete' }));
 });
 
 // Watch
 // -----
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(scripts, ['scripts']);
   gulp.watch(styles, ['styles']);
+  gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['jekyll-rebuild']);
 });

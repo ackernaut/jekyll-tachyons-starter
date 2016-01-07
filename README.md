@@ -1,6 +1,10 @@
 # jekyll-tachyons-starter
 A minimal, clean starting point using Jeykll + Tachyons
 
+* Includes:
+  * [Tachyons Sass](https://github.com/tachyons-css/tachyons-sass)
+  * [Browsersync](https://www.browsersync.io/)
+
 ## Local development
 * Install:
   * [Jekyll](http://jekyllrb.com/docs/installation/)
@@ -11,10 +15,8 @@ A minimal, clean starting point using Jeykll + Tachyons
   * Consider using [Homebrew](http://brew.sh/) to install some of the tools.
 * Run:
   * `npm install`
-  * `gulp`
   * `bundle install`
-  * `jekyll serve --baseurl ''`
-  * Running `gulp watch` comes in handy while developing.
+  * `gulp`
 
 ## Assets
 
@@ -26,7 +28,8 @@ A minimal, clean starting point using Jeykll + Tachyons
 * Run `gulp styles` to build and `gulp scsslint` to lint.
 * The styles are built using `gulp-autoprefixer` to keep the definitions clean of vendor prefix maintenance.
 
-## Thanks to:
+## ¡Gracias!
 
 * [Jekyll](http://jekyllrb.com/)
 * [Tachyons](http://tachyons.io/)
+* [Browsersync setup](https://github.com/shakyShane/jekyll-gulp-sass-browser-sync)

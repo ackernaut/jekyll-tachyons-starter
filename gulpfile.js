@@ -105,7 +105,7 @@ gulp.task('jshint', function () {
 
 gulp.task('scsslint', function () {
   return gulp.src(styles)
-    .pipe(scsslint('assets/src/styles/.scss-lint.yml'))
+    .pipe(scsslint('.scss-lint.yml'))
     .pipe(scsslint.reporter());
 });
 
@@ -136,5 +136,5 @@ gulp.task('styles', function () {
 gulp.task('watch', function () {
   gulp.watch(scripts, ['scripts']);
   gulp.watch(styles, ['styles']);
-  gulp.watch(['**/*.html', '_includes/**/*.html', '_layouts/**/*.html', '_posts/*'], ['jekyll-rebuild']);
+  gulp.watch(['**/*.html'], ['jekyll-rebuild']);
 });

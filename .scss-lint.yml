@@ -1,6 +1,6 @@
 exclude:
-  - 'mixins/_mixins.scss'
-  - 'libs/_pygments-manni.scss'
+  - 'assets/src/styles/mixins/_mixins.scss'
+  - 'assets/src/styles/libs/_pygments-manni.scss'
 
 linters:
   ColorVariable:

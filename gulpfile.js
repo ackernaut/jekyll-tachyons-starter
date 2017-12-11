@@ -8,7 +8,7 @@ var browserSync  = require('browser-sync'),
     gulp         = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     concat       = require('gulp-concat'),
-    jshint       = require('gulp-jshint'),
+    // jshint       = require('gulp-jshint'),
     minifycss    = require('gulp-minify-css'),
     notify       = require('gulp-notify'),
     rename       = require('gulp-rename'),
@@ -80,7 +80,7 @@ gulp.task('default', ['browser-sync', 'watch']);
 
 gulp.task('scripts', function () {
   return gulp.src(scripts)
-    .pipe(jshint.reporter('default'))
+    // .pipe(jshint.reporter('default'))
     .pipe(concat('scripts.js', {
       newLine: ';'
     }))
@@ -94,11 +94,11 @@ gulp.task('scripts', function () {
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
-gulp.task('jshint', function () {
-  return gulp.src('assets/src/scripts/**/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('default'));
-});
+// gulp.task('jshint', function () {
+//   return gulp.src('assets/src/scripts/**/*.js')
+//     .pipe(jshint('.jshintrc'))
+//     .pipe(jshint.reporter('default'));
+// });
 
 // Sass lint
 // ----------
